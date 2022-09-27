@@ -10,14 +10,43 @@
     <meta name="robots" content="index, follow"> <!-- Cambiar el index -->
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="./all.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style/all.min.css">
+    <!-- Main -->
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-    <header class="header">
-        <h1 class="title">Juan Cruz Bolatti</h1>
-        <h2>Programacion, Diseño Web y Escritura</h2>
-        <p>Pagina en proceso... Y lamentablemente las redes sociales tambien, asique recuerde mi nombre para cuando este completa!</p>
-    </header>
+    <div class="content">
+        <div class="menu">
+            <div class="title">
+                <h1>Juan</h1>
+                <h1>Cruz</h1>
+            </div>
+            <div class="navbar">
+                <button action="#">Conoceme</button>
+                <button action="#">Proyectos</button>
+                <button action="#">Portafolio</button>
+                <button action="#">Arte</button>
+                <button action="#">Contacto</button>
+            </div>
+        </div>
+        
+        <div class="planets clearfix">
+            <ul class="solarsystem">
+                <li class="sun"><a href="#sun"><span>Sun</span></a></li>
+                <li class="planetProyects"><a href="#planetProyects"><span>Proyectos</span></a></li>
+                <li class="planetPortfolio"><a href="#planetPortfolio"><span>Portafolio<span class="moon"> &amp; Moon</span></span></a></li>
+                <li class="planetArt"><a href="#planetArt"><span>Arte &amp; <span class="ring">Ring</span></span></a></li>
+                <li class="planetContact"><a href="#planetContact"><span>Contacto</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="coordinates">Coordenadas: <span>-34.452326747; -38.368362343</span>.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <!-- MAIN -->
+    <script src="./js/main.js"></script>
 </body>
 </html>
