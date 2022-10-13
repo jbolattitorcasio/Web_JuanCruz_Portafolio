@@ -19,7 +19,7 @@ html {
 }
 @font-face {
     font-family: bahnschrift;
-    src:url("/fonts/bahnschrift.ttf"); /* Poner fuente */
+    src: url("fonts/bahnschrift.ttf"); /* Poner fuente */
 }
 body {
     font-family: bahnschrift, helvetica;
@@ -27,6 +27,8 @@ body {
     line-height: 1.6;
     background-color: #000; /* Cambiar a fondo */
     height: 97vh;
+    top: 0;
+    margin: 0;
 }
 
 /** GLOBAL **/
@@ -72,54 +74,97 @@ h1 {
 /** BODY **/
 .content {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 45% 55%;
     padding: 10px;
     height: 100%;
 }
 /** Menu **/
 .menu {
-    margin-left: 5rem;
+    margin-left: 5vw;
 }
 .title {
-    margin-bottom: 10rem;
+    margin-bottom: 5vw;
+    margin-left: 3vw;
+    animation: title 6s ease-in-out infinite;
 }
 .title h1 {
     color: var(--color-white);
-    font-size: 15rem;
+    font-size: 9vw;
 }
 .title h1::after {
     content: "CRUZ";
     position: relative;
-    top: 13rem;
-    right: 20rem;
+    top: 7vw;
+    right: 11.75vw;
+}
+@media (max-height: 800px) {
+    .title {
+        margin-bottom: 12vh;
+        margin-left: 7vw;
+    }
+    .title h1 {
+        font-size: 7vw;
+    }
+    .title h1::after {
+        content: "CRUZ";
+        position: relative;
+        top: 5.5vw;
+        right: 9.14vw;
+    }
 }
 /* Navbar */
 .navbar {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.navbar::before {
-    display: block;
-    content: ">---------------------------------------------------------------------------------------<";
-    color: white;
-}
-.navbar::after {
-    content: ">---------------------------------------------------------------------------------------<";
-    color: white;
+    border-top: 2px dashed #fff;
+    border-bottom: 2px dashed #fff;
 }
 .navbar button {
     color: white;
+    font-size: 2.7vw;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: .7vh 0;
     background-color: transparent;
 }
-
-
-/** BACKGROUND STARS **/
-
+.navbar button:nth-child(1) {
+    margin-top: 2.5vw;
+}
+.navbar button:nth-child(5) {
+    margin-bottom: 2.5vw;
+}
+@media (max-height: 800px) {
+    .navbar button {
+        font-size: 1.5vw;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: .7vh 0;
+        background-color: transparent;
+    }
+    .navbar button:nth-child(1) {
+        margin-top: 1.2vw;
+    }
+    .navbar button:nth-child(5) {
+        margin-bottom: 1.2vw;
+    }
+}
+/* Menu Animatios */
+@keyframes title {
+    0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
 
 /** PLANETS **/
 /* 
-Based on the project of Yash Bhardwaj (https://codepen.io/yashbhardwaj/pen/yFIiJ),
+Inspired on the project of Yash Bhardwaj (https://codepen.io/yashbhardwaj/pen/yFIiJ),
 with modifications in:
 -The items display
 -The animations times
@@ -131,7 +176,7 @@ with modifications in:
 /* Solar System Styles */
 ul.solarsystem {
     position: relative;
-    height: 95%; /* Modificar tamaño del sistema */
+    height: 95vh; /* Modificar tamaño del sistema */
     list-style: none;
     -webkit-transition: all 0.09s ease-in;
     -moz-transition: all 0.09s ease-in;
@@ -144,6 +189,10 @@ ul.solarsystem li {
     display: block;
     position: absolute;
     border: 2px solid #afb6c9;
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+    z-index: 99;
 }
 ul.solarsystem li span {
     display: block;
@@ -173,11 +222,21 @@ ul.solarsystem li.active.planetPortfolio .moon {
 }
 /* Sun */
 ul.solarsystem li.sun {
-    width: 8.7vw; /* Cambiar tamaño en relacion al ancho */
-    height: 8.7vw; /* Cambiar tamaño */
-    -webkit-border-radius: 100%; /* Cambiar tamaño */
-    -moz-border-radius: 100%; /* Cambiar tamaño */
-    border-radius: 100%; /* Cambiar tamaño */
+    @media (min-height: 800px) {
+        width: 8.7vw; /* Cambiar tamaño en relacion al ancho */
+        height: 8.7vw; /* Cambiar tamaño */
+        top: calc(50% - (8.7vw/2)); /* Cambiar posicion */
+        left: calc(50% - (8.7vw/2)); /* Cambiar posicion */
+    }
+    @media (max-height: 800px) {
+        width: 6vw; 
+        height: 6vw; 
+        top: calc(50% - (6vw/2)); 
+        left: calc(50% - (6vw/2)); 
+    }
+    -webkit-border-radius: 100%; 
+    -moz-border-radius: 100%; 
+    border-radius: 100%;
     background: #fd7d34; /* Cambiar color */
     background-image: -webkit-gradient(
         linear,
@@ -191,8 +250,6 @@ ul.solarsystem li.sun {
         rgb(204,153,0) 22%,
         rgb(255,219,112) 100%
     );
-    top: calc(50% - (8.7vw/2)); /* Cambiar posicion */
-    left: calc(50% - (8.7vw/2)); /* Cambiar posicion */
     border: none;
     -webkit-box-shadow: 0 0 50px #fdb734;
     -moz-box-shadow: 0 0 50px #fdb734;
@@ -210,52 +267,84 @@ ul.solarsystem li.sun span {
     -moz-border-radius:100%;
     border-radius:100%;   
 }
-/* Planet Proyects */
-$Width1: 14.5vw;
-$Position1: calc(($Width1*11.3)/15);
-ul.solarsystem li.planetProyects {
-    width: $Width1;
-    height: $Width1;
-    -webkit-border-radius:100%;
-    -moz-border-radius:100%;
-    border-radius:100%;
-    top: calc(50% - ($Width1/2));
-    left: calc(50% - ($Width1/2));
-    z-index: 99;
-}
+/* Planet Proyects (Mars)*/
+$Width1: null; 
+$Position1: null;
 ul.solarsystem li.planetProyects span {
     background: #902e55;
-    top: $Position1;
-    left: $Position1;
-    width: 2.4vw;
-    height: 2.4vw;
     border-radius: 100%;
 }
-ul.solarsystem li.planetProyects span:hover { /* Funciona el hover */
-    background: red; 
-    transform: scale(3);
+@media screen and (min-height: 800px) {
+    $Width1: 14.5vw;
+    $Position1: calc(($Width1*11.3)/15);
+    ul.solarsystem li.planetProyects {
+        width: $Width1;
+        height: $Width1;
+        top: calc(50% - ($Width1/2));
+        left: calc(50% - ($Width1/2));
+    }
+    ul.solarsystem li.planetProyects span {
+        top: $Position1;
+        left: $Position1;
+        width: 2.4vw;
+        height: 2.4vw;
+    }
+  }
+@media screen and (max-height: 800px) {
+    $Width1: 10vw;
+    $Position1: calc(($Width1*11.1)/15);
+    ul.solarsystem li.planetProyects {
+        width: $Width1;
+        height: $Width1;
+        top: calc(50% - ($Width1/2));
+        left: calc(50% - ($Width1/2));
+    }
+    ul.solarsystem li.planetProyects span {
+        top: $Position1;
+        left: $Position1;
+        width: 1.8vw;
+        height: 1.8vw;
+    }
 }
-/* Planet Portfolio */
-$Width2: 23.5vw;
-$Position2: calc(($Width2*11.3)/15);
-ul.solarsystem li.planetPortfolio {
-    width: $Width2;
-    height: $Width2;
-    -webkit-border-radius:100%;
-    -moz-border-radius:100%;
-    border-radius:100%;
-    top: calc(50% - ($Width2/2));
-    left: calc(50% - ($Width2/2));
-    z-index: 99;
-}
+
+/* Planet Portfolio (Earth)*/
+$Width2: null;
+$Position2: null;
 ul.solarsystem li.planetPortfolio span {
     background: #159097;
-    bottom: $Position2;
-    right: $Position2;
-    /* Lo siguiente para cada planeta es para cambiar el tamaño */
-    width: 4vw;
-    height: 4vw;
     border-radius: 100%;
+}
+@media screen and (min-height: 800px) {
+    $Width2: 23.5vw;
+    $Position2: calc(($Width2*11.3)/15);
+    ul.solarsystem li.planetPortfolio {
+        width: $Width2;
+        height: $Width2;
+        top: calc(50% - ($Width2/2));
+        left: calc(50% - ($Width2/2));
+    }
+    ul.solarsystem li.planetPortfolio span {
+        bottom: $Position2;
+        right: $Position2;
+        width: 4vw;
+        height: 4vw;
+    }
+}
+@media screen and (max-height: 800px) {
+    $Width2: 16.79vw;
+    $Position2: calc(($Width2*11.28)/15);
+    ul.solarsystem li.planetPortfolio {
+        width: $Width2;
+        height: $Width2;
+        top: calc(50% - ($Width2/2));
+        left: calc(50% - ($Width2/2));
+    }
+    ul.solarsystem li.planetPortfolio span {
+        bottom: $Position2;
+        right: $Position2;
+        width: 3vw;
+        height: 3vw;
+    }
 }
 ul.solarsystem li.planetPortfolio span.moon {
     width: .5vw;
@@ -267,65 +356,109 @@ ul.solarsystem li.planetPortfolio span.moon {
     top: -.1vw;
     left: -.1vw;
 }
-/* Planet Art */
-$Width3: 32.5vw;
-$Position3: 25.8vw;
-ul.solarsystem li.planetArt {
-    width: $Width3;
-    height: $Width3;
-    -webkit-border-radius:100%;
-    -moz-border-radius:100%;
-    border-radius:100%;
-    top: calc(50% - ($Width3/2));
-    left: calc(50% - ($Width3/2));
-    z-index: 99;
-}
-ul.solarsystem li.planetArt span {
-    background: #6034fd;
-    top: $Position3;
-    left: $Position3;
-    width: 3.3vw;
-    height: 3.3vw;
-    border-radius: 100%;
-}
+/* Planet Art (Saturn) */
+$Width3: null;
+$Position3: null;
 ul.solarsystem li.planetArt span.ring {
-    width: 3vw;
-    height: 3vw;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;
     background: none;
     border: 2px solid #6034fd;
-    left: .1vw;
-    top: .1vw;
     -webkit-transform: skewY(50deg);
     -moz-transform: skewY(50deg);
     -o-transform: skewY(50deg);
     transform: skewY(50deg);
 }
-/* Planet Contact */
-$Width4: 41.5vw;
-$Position4: 34vw;
-ul.solarsystem li.planetContact {
-    width: $Width4;
-    height: $Width4;
-    -webkit-border-radius:100%;
-    -moz-border-radius:100%;
-    border-radius:100%;
-    top: calc(50% - ($Width4/2));
-    left: calc(50% - ($Width4/2));
-    z-index: 99;
+@media screen and (min-height: 800px) {
+    $Width3: 32.5vw;
+    $Position3: 25.8vw;
+    ul.solarsystem li.planetArt {
+        width: $Width3;
+        height: $Width3;
+        top: calc(50% - ($Width3/2));
+        left: calc(50% - ($Width3/2));
+    }
+    ul.solarsystem li.planetArt span {
+        background: #6034fd;
+        top: $Position3;
+        left: $Position3;
+        width: 3.3vw;
+        height: 3.3vw;
+        border-radius: 100%;
+    }
+    ul.solarsystem li.planetArt span.ring {
+        width: 3vw;
+        height: 3vw;
+        left: .1vw;
+        top: .1vw;
+    }
 }
-ul.solarsystem li.planetContact span {
-    background: #571c56;
-    /* Cambiar posicion segun el tamaño */
-    bottom: calc($Position4);
-    right: $Position4;
-    /* Lo siguiente para cada planeta es para cambiar el tamaño */
-    width: 2.8vw;
-    height: 2.8vw;
-    border-radius: 100%;
+@media screen and (max-height: 800px) {
+    $Width3: 23.3vw;
+    $Position3: 18.5vw;
+    ul.solarsystem li.planetArt {
+        width: $Width3;
+        height: $Width3;
+        top: calc(50% - ($Width3/2));
+        left: calc(50% - ($Width3/2));
+    }
+    ul.solarsystem li.planetArt span {
+        background: #6034fd;
+        top: $Position3;
+        left: $Position3;
+        width: 2.475vw;
+        height: 2.475vw;
+        border-radius: 100%;
+    }
+    ul.solarsystem li.planetArt span.ring {
+        width: 2.25vw;
+        height: 2.25vw;
+        left: .1vw;
+        top: .1vw;
+    }
 }
+
+/* Planet Contact (Last one)*/
+$Width4: null;
+$Position4: null;
+@media screen and (min-height: 800px) {
+    $Width4: 41.5vw;
+    $Position4: 34vw;
+    ul.solarsystem li.planetContact {
+        width: $Width4;
+        height: $Width4;
+        top: calc(50% - ($Width4/2));
+        left: calc(50% - ($Width4/2));
+    }
+    ul.solarsystem li.planetContact span {
+        background: #571c56;
+        bottom: calc($Position4);
+        right: $Position4;
+        width: 2.8vw;
+        height: 2.8vw;
+        border-radius: 100%;
+    }
+}
+@media screen and (max-height: 800px) {
+    $Width4: 29.64vw;
+    $Position4: 24.2vw;
+    ul.solarsystem li.planetContact {
+        width: $Width4;
+        height: $Width4;
+        top: calc(50% - ($Width4/2));
+        left: calc(50% - ($Width4/2));
+    }
+    ul.solarsystem li.planetContact span {
+        background: #571c56;
+        bottom: calc($Position4);
+        right: $Position4;
+        width: 2.1vw;
+        height: 2.1vw;
+        border-radius: 100%;
+    }
+}
+
 /* CSS3 Animations */
 ul.solarsystem li {
     -webkit-animation-iteration-count:infinite;
